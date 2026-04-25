@@ -25,9 +25,26 @@ function LoginContent() {
       setLoading(false);
       return;
     }
+    
+    // Fetch user profile to check role
+    const { data: { user } } = await supabase.auth.getUser();
+    const { data: profile } = await supabase
+      .from("user_profiles")
+      .select("role")
+      .eq("id", user?.id)
+      .single();
+    
     toast.success("Welcome back!");
-    const redirect = params.get("redirect") || "/dashboard";
-    router.push(redirect);
+    
+    // Redirect based on role
+    const redirectParam = params.get("redirect");
+    if (redirectParam) {
+      router.push(redirectParam);
+    } else if (profile?.role === "admin") {
+      router.push("/admin");
+    } else {
+      router.push("/dashboard");
+    }
     router.refresh();
   }
 

@@ -54,8 +54,9 @@ export function Sidebar({ variant = "user", userRole = "user" }) {
 
   const content = (
     <div className="flex flex-col h-full">
-      <div className="px-5 py-5 border-b border-white/10">
-        <Logo light />
+      <div className="px-5 py-4 border-white/10">
+        {/* <Logo light /> */}
+        <img src="/images/logo.png" alt="Listing Kit AI" className="w-auto h-20" />
       </div>
 
       {variant === "admin" && (
@@ -85,7 +86,7 @@ export function Sidebar({ variant = "user", userRole = "user" }) {
           );
         })}
 
-        {userRole === "admin" && variant !== "admin" && (
+        {/* {userRole === "admin" && variant !== "admin" && (
           <Link href="/admin" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-brand-gold hover:bg-white/5 mt-4">
             <Shield size={18} /> Admin Panel
           </Link>
@@ -94,7 +95,7 @@ export function Sidebar({ variant = "user", userRole = "user" }) {
           <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-brand-gold hover:bg-white/5 mt-4">
             <LayoutDashboard size={18} /> Back to User Dashboard
           </Link>
-        )}
+        )} */}
       </nav>
 
       <div className="p-3 border-t border-white/10">

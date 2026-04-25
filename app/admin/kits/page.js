@@ -28,10 +28,27 @@ export default function AdminKitsPage() {
       const supabase = createSupabaseBrowserClient();
       const { data } = await supabase
         .from("marketing_kits")
-        .select("*, user_profiles!inner(email, full_name)")
+        .select("*")
         .order("created_at", { ascending: false })
         .limit(200);
-      setRows(data || []);
+      
+      if (data && data.length > 0) {
+        // Fetch user profiles separately
+        const userIds = [...new Set(data.map(k => k.user_id))];
+        const { data: profiles } = await supabase
+          .from("user_profiles")
+          .select("id, email, full_name")
+          .in("id", userIds);
+        
+        const profileMap = Object.fromEntries(profiles?.map(p => [p.id, p]) || []);
+        const enrichedData = data.map(k => ({
+          ...k,
+          user_profiles: profileMap[k.user_id],
+        }));
+        setRows(enrichedData);
+      } else {
+        setRows(data || []);
+      }
       setLoading(false);
     }
     load();

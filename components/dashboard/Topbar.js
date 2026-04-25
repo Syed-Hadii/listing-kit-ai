@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Bell, Plus, CreditCard } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabaseClient";
 import { Badge } from "@/components/ui/Badge";
@@ -10,12 +10,14 @@ export function Topbar({ profile }) {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([]);
   const [unread, setUnread] = useState(0);
+  const supabaseRef = useRef(null);
 
-  useEffect(() => {
-    let supabase;
-    let channel;
-    async function load() {
-      supabase = createSupabaseBrowserClient();
+  // Fetch notifications (can be called multiple times)
+  const loadNotifications = async () => {
+    try {
+      const supabase = supabaseRef.current;
+      if (!supabase) return;
+
       const { data } = await supabase
         .from("notifications")
         .select("*")
@@ -23,14 +25,22 @@ export function Topbar({ profile }) {
         .limit(8);
       setItems(data || []);
       setUnread((data || []).filter((n) => !n.is_read).length);
-
-      channel = supabase
-        .channel("notifications-realtime")
-        .on("postgres_changes", { event: "*", schema: "public", table: "notifications" }, () => load())
-        .subscribe();
+    } catch (error) {
+      console.error("Error loading notifications:", error);
     }
-    load();
-    return () => { if (channel) supabase?.removeChannel(channel); };
+  };
+
+  useEffect(() => {
+    const supabase = createSupabaseBrowserClient();
+    supabaseRef.current = supabase;
+    
+    // Load notifications on mount only
+    loadNotifications();
+
+    // Poll for new notifications every 10 seconds instead of realtime
+    const interval = setInterval(loadNotifications, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   async function markAllRead() {

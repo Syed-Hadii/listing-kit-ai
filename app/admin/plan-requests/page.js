@@ -20,9 +20,26 @@ export default function AdminPlanRequests() {
     const supabase = createSupabaseBrowserClient();
     const { data } = await supabase
       .from("plan_requests")
-      .select("*, user_profiles!inner(email, full_name)")
+      .select("*")
       .order("created_at", { ascending: false });
-    setReqs(data || []);
+    
+    if (data && data.length > 0) {
+      // Fetch user profiles separately
+      const userIds = [...new Set(data.map(r => r.user_id))];
+      const { data: profiles } = await supabase
+        .from("user_profiles")
+        .select("id, email, full_name")
+        .in("id", userIds);
+      
+      const profileMap = Object.fromEntries(profiles?.map(p => [p.id, p]) || []);
+      const enrichedData = data.map(r => ({
+        ...r,
+        user_profiles: profileMap[r.user_id],
+      }));
+      setReqs(enrichedData);
+    } else {
+      setReqs(data || []);
+    }
     setLoading(false);
   }
   useEffect(() => { load(); }, []);
