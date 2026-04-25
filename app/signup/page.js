@@ -23,7 +23,7 @@ export default function SignupPage() {
     }
     setLoading(true);
     const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: fullName } },
@@ -33,6 +33,25 @@ export default function SignupPage() {
       setLoading(false);
       return;
     }
+
+    // Ensure profile exists (fallback if trigger doesn't fire immediately)
+    if (data?.user?.id) {
+      try {
+        await supabase.from("user_profiles").insert({
+          id: data.user.id,
+          email: data.user.email,
+          full_name: fullName,
+          role: "user",
+          current_plan: "free_trial",
+          subscription_status: "free_trial",
+          credits_remaining: 5,
+        });
+      } catch (err) {
+        // Profile may already exist from trigger - that's OK
+        console.log("Profile insert (expected if trigger fired):", err.message);
+      }
+    }
+
     toast.success("Account created! Redirecting…");
     router.push("/dashboard");
     router.refresh();

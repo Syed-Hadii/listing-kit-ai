@@ -3,6 +3,7 @@ import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdminClient } from "@/lib/supabaseAdmin";
 import { generateMarketingKit, safeParseJSON } from "@/lib/aiProvider";
 import { buildMarketingKitPrompt } from "@/lib/prompts";
+import { validateGenerateRequest } from "@/lib/validation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,11 +37,14 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const required = ["property_type", "location", "price"];
-    for (const f of required) {
-      if (!body?.[f]) {
-        return NextResponse.json({ error: `Missing field: ${f}` }, { status: 400 });
-      }
+    
+    // Validate input
+    const validation = validateGenerateRequest(body);
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: "Invalid request", details: validation.errors },
+        { status: 400 }
+      );
     }
 
     // Build prompt

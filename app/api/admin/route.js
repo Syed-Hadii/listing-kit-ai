@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdminClient } from "@/lib/supabaseAdmin";
 import { getPlan } from "@/lib/plans";
+import { validateAdminCreditOperation, validatePlanRequest } from "@/lib/validation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,6 +32,14 @@ export async function POST(request) {
     switch (action) {
       // --- CREDITS ---
       case "add_credits": {
+        const validation = validateAdminCreditOperation(body);
+        if (!validation.isValid) {
+          return NextResponse.json(
+            { error: "Invalid request", details: validation.errors },
+            { status: 400 }
+          );
+        }
+
         const { user_id, amount, reason } = body;
         const { data: p } = await admin
           .from("user_profiles")
@@ -51,6 +60,14 @@ export async function POST(request) {
         return NextResponse.json({ ok: true });
       }
       case "remove_credits": {
+        const validation = validateAdminCreditOperation(body);
+        if (!validation.isValid) {
+          return NextResponse.json(
+            { error: "Invalid request", details: validation.errors },
+            { status: 400 }
+          );
+        }
+
         const { user_id, amount, reason } = body;
         const { data: p } = await admin
           .from("user_profiles")
@@ -66,6 +83,14 @@ export async function POST(request) {
       }
       case "reset_credits": {
         const { user_id, amount = 0 } = body;
+        
+        if (!user_id || typeof user_id !== 'string') {
+          return NextResponse.json({ error: "user_id is required" }, { status: 400 });
+        }
+        if (isNaN(Number(amount)) || Number(amount) < 0 || Number(amount) > 10000) {
+          return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+        }
+
         await admin.from("user_profiles").update({ credits_remaining: Number(amount) }).eq("id", user_id);
         await admin.from("credit_logs").insert({
           user_id, action: "admin_reset", credits_change: 0, reason: `Admin reset credits to ${amount}`,
