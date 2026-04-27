@@ -75,9 +75,9 @@ export function Sidebar({ variant = "user", userRole = "user" }) {
               href={link.href}
               onClick={() => setMobileOpen(false)}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors border border-transparent",
                 active
-                  ? "bg-gold-gradient text-brand-navy font-semibold"
+                  ? "bg-white/10 text-brand-gold border-brand-gold/40 shadow-sm"
                   : "text-white/70 hover:bg-white/5 hover:text-white"
               )}
             >

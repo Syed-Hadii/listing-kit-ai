@@ -17,7 +17,11 @@ export default function SettingsPage() {
       const supabase = createSupabaseBrowserClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
-      const { data } = await supabase.from("user_profiles").select("*").eq("id", user.id).single();
+      const { data } = await supabase
+        .from("user_profiles")
+        .select("id, email, full_name, current_plan, subscription_status, credits_remaining, role")
+        .eq("id", user.id)
+        .single();
       setProfile(data);
       setFullName(data?.full_name || "");
     }

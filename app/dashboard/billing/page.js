@@ -20,9 +20,9 @@ export default function BillingPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
     const [{ data: p }, { data: req }, { data: hist }] = await Promise.all([
-      supabase.from("user_profiles").select("*").eq("id", user.id).single(),
-      supabase.from("plan_requests").select("*").eq("user_id", user.id).in("status", ["pending", "payment_link_sent"]).order("created_at", { ascending: false }).limit(1).maybeSingle(),
-      supabase.from("payments").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(10),
+      supabase.from("user_profiles").select("current_plan, subscription_status, credits_remaining, credits_used").eq("id", user.id).single(),
+      supabase.from("plan_requests").select("status, selected_plan, plan_price, payoneer_link").eq("user_id", user.id).in("status", ["pending", "payment_link_sent"]).order("created_at", { ascending: false }).limit(1).maybeSingle(),
+      supabase.from("payments").select("id, plan_name, amount, status, created_at, marked_paid_at").eq("user_id", user.id).order("created_at", { ascending: false }).limit(10),
     ]);
     setProfile(p);
     setActiveReq(req);

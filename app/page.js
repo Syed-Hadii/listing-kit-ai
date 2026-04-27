@@ -90,7 +90,7 @@ export default function LandingPage() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {STEPS.map((s) => (
-            <div key={s.n} className="card p-8 hover:shadow-luxury transition-shadow">
+            <div key={s.n} className="card hover:shadow-luxury transition-shadow">
               <div className="font-display text-5xl font-bold text-brand-gold">{s.n}</div>
               <h3 className="mt-4 text-xl font-bold text-brand-navy">{s.title}</h3>
               <p className="mt-2 text-brand-navy/60">{s.desc}</p>
@@ -110,7 +110,7 @@ export default function LandingPage() {
             {FEATURES.map((f) => {
               const Icon = f.icon;
               return (
-                <div key={f.title} className="card p-6 group hover:border-brand-gold/40 transition-colors">
+                <div key={f.title} className="card group hover:border-brand-gold/40 transition-colors">
                   <div className="w-11 h-11 rounded-xl bg-brand-navy text-brand-gold flex items-center justify-center group-hover:bg-gold-gradient group-hover:text-brand-navy transition-colors">
                     <Icon size={20} />
                   </div>
@@ -133,7 +133,7 @@ export default function LandingPage() {
           {WHY.map((w) => {
             const Icon = w.icon;
             return (
-              <div key={w.title} className="card p-8">
+              <div key={w.title} className="card">
                 <Icon className="text-brand-gold" size={28} />
                 <h3 className="mt-4 text-xl font-bold text-brand-navy">{w.title}</h3>
                 <p className="mt-2 text-brand-navy/60">{w.desc}</p>
@@ -200,7 +200,7 @@ export default function LandingPage() {
         </div>
         <div className="space-y-4">
           {FAQ.map((f, i) => (
-            <details key={i} className="card p-6 group">
+            <details key={i} className="card group">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-brand-navy">
                 {f.q}
                 <ChevronRight className="group-open:rotate-90 transition-transform text-brand-gold" size={18} />

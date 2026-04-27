@@ -22,7 +22,7 @@ export default function SavedKitsPage() {
       const supabase = createSupabaseBrowserClient();
       const { data } = await supabase
         .from("marketing_kits")
-        .select("*")
+        .select("id, property_type, location, price, target_audience, tone, created_at")
         .order("created_at", { ascending: false });
       setKits(data || []);
       setLoading(false);

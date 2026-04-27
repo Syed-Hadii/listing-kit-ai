@@ -12,36 +12,32 @@ export function Topbar({ profile }) {
   const [unread, setUnread] = useState(0);
   const supabaseRef = useRef(null);
 
-  // Fetch notifications (can be called multiple times)
-  const loadNotifications = async () => {
-    try {
-      const supabase = supabaseRef.current;
-      if (!supabase) return;
-
-      const { data } = await supabase
-        .from("notifications")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(8);
-      setItems(data || []);
-      setUnread((data || []).filter((n) => !n.is_read).length);
-    } catch (error) {
-      console.error("Error loading notifications:", error);
-    }
-  };
-
   useEffect(() => {
     const supabase = createSupabaseBrowserClient();
     supabaseRef.current = supabase;
-    
-    // Load notifications on mount only
-    loadNotifications();
+    if (!profile?.id) return;
 
-    // Poll for new notifications every 10 seconds instead of realtime
-    const interval = setInterval(loadNotifications, 10000);
+    let interval;
+    const load = async () => {
+      try {
+        if (document.visibilityState !== "visible") return;
+        const { data } = await supabase
+          .from("notifications")
+          .select("id, title, message, is_read, created_at")
+          .eq("user_id", profile.id)
+          .order("created_at", { ascending: false })
+          .limit(8);
+        setItems(data || []);
+        setUnread((data || []).filter((n) => !n.is_read).length);
+      } catch (error) {
+        console.error("Error loading notifications:", error);
+      }
+    };
 
+    load();
+    interval = setInterval(load, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [profile?.id]);
 
   async function markAllRead() {
     await fetch("/api/notifications/read", {

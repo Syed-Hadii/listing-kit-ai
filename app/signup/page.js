@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { createSupabaseBrowserClient } from "@/lib/supabaseClient";
@@ -9,7 +8,6 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Card";
 
 export default function SignupPage() {
-  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,16 +50,15 @@ export default function SignupPage() {
       }
     }
 
-    toast.success("Account created! Redirecting…");
-    router.push("/dashboard");
-    router.refresh();
+    toast.success("Please go to your inbox and confirm your email to complete signup.");
+    setLoading(false);
   }
 
   return (
     <div className="min-h-screen bg-brand-cream flex flex-col">
       <div className="px-6 py-5"><Logo /></div>
       <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-md card p-8">
+        <div className="w-full max-w-md card">
           <h1 className="font-display text-2xl font-bold text-brand-navy">Start Free</h1>
           <p className="text-sm text-brand-navy/60 mt-1">5 free credits. No credit card required.</p>
           <form onSubmit={onSubmit} className="mt-6 space-y-4">

@@ -14,12 +14,12 @@ const PLATFORMS = ["Instagram", "Facebook", "LinkedIn", "Email", "All Platforms"
 const LANGS = ["English", "French", "Spanish"];
 
 const SECTION_META = [
-  { key: "instagram_caption", label: "Instagram Caption", emoji: "📸" },
-  { key: "reel_script", label: "Reel Script", emoji: "🎬" },
-  { key: "email_blast", label: "Email Blast", emoji: "✉️" },
-  { key: "ad_copy", label: "Facebook / IG Ad", emoji: "📣" },
-  { key: "linkedin_post", label: "LinkedIn Post", emoji: "💼" },
-  { key: "property_description_output", label: "Property Description", emoji: "🏡" },
+  { key: "instagram_caption", label: "Instagram Caption" },
+  { key: "reel_script", label: "Reel Script" },
+  { key: "email_blast", label: "Email Blast" },
+  { key: "ad_copy", label: "Facebook / IG Ad"},
+  { key: "linkedin_post", label: "LinkedIn Post" },
+  { key: "property_description_output", label: "Property Description" },
 ];
 
 export default function NewKitPage() {
@@ -167,8 +167,7 @@ export default function NewKitPage() {
           {SECTION_META.map((s) => (
             <Card key={s.key}>
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">{s.emoji}</span>
+                <div className="flex items-center gap-2"> 
                   <h3 className="font-bold text-brand-navy text-lg">{s.label}</h3>
                 </div>
                 <Button variant="outline" size="sm" onClick={() => copy(kit[s.key], s.key)}>

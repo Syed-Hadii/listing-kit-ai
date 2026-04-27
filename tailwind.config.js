@@ -18,12 +18,12 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["'Playfair Display'", "serif"],
+        sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
       },
       boxShadow: {
-        luxury: "0 10px 40px -10px rgba(212, 175, 55, 0.15)",
-        card: "0 4px 24px -8px rgba(11, 20, 55, 0.08)",
+        luxury: "0 14px 32px -18px rgba(212, 175, 55, 0.55)",
+        card: "0 10px 28px -18px rgba(11, 20, 55, 0.18)",
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #E8C65A 50%, #B8941F 100%)',

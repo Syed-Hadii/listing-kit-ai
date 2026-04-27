@@ -25,9 +25,9 @@ export default async function DashboardHome() {
   if (!user) redirect("/login");
 
   const [{ data: profile }, { data: recentKits }, { data: paymentReq }] = await Promise.all([
-    supabase.from("user_profiles").select("*").eq("id", user.id).single(),
-    supabase.from("marketing_kits").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5),
-    supabase.from("plan_requests").select("*").eq("user_id", user.id).in("status", ["pending", "payment_link_sent"]).order("created_at", { ascending: false }).limit(1).maybeSingle(),
+    supabase.from("user_profiles").select("full_name, current_plan, subscription_status, credits_remaining, credits_used, total_kits_generated").eq("id", user.id).single(),
+    supabase.from("marketing_kits").select("id, property_type, location, price, target_audience, tone, created_at").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5),
+    supabase.from("plan_requests").select("status, payoneer_link").eq("user_id", user.id).in("status", ["pending", "payment_link_sent"]).order("created_at", { ascending: false }).limit(1).maybeSingle(),
   ]);
 
   const plan = getPlan(profile?.current_plan);

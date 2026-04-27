@@ -31,10 +31,15 @@ export default function AdminUsersPage() {
 
   async function load() {
     const supabase = createSupabaseBrowserClient();
-    const { data } = await supabase.from("user_profiles").select("*").order("created_at", { ascending: false });
+    const [{ data }, { data: kits }] = await Promise.all([
+      supabase
+        .from("user_profiles")
+        .select("id, full_name, email, role, is_disabled, current_plan, subscription_status, credits_remaining, credits_used, created_at, last_active_at")
+        .order("created_at", { ascending: false }),
+      supabase.from("marketing_kits").select("user_id"),
+    ]);
     setUsers(data || []);
     // Aggregate kit counts
-    const { data: kits } = await supabase.from("marketing_kits").select("user_id");
     const counts = {};
     (kits || []).forEach((k) => { counts[k.user_id] = (counts[k.user_id] || 0) + 1; });
     setKitsCount(counts);
