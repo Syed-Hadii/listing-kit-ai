@@ -12,6 +12,19 @@ export const metadata = {
     title: "Listing Kit AI",
     description:
       "AI-powered marketing kits for real estate agents. Generate a full campaign in under 30 seconds.",
+    images: [
+      {
+        url: "/images/favicon.png",
+        alt: "Listing Kit AI",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Listing Kit AI",
+    description:
+      "AI-powered marketing kits for real estate agents. Generate a full campaign in under 30 seconds.",
+    images: ["/images/favicon.png"],
   },
 };
 
