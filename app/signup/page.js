@@ -61,17 +61,19 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-brand-cream flex flex-col">
-      <div className="px-6 py-5">
-        <Logo />
-      </div>
-      <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-md card">
-          <h1 className="font-display text-2xl font-bold text-brand-navy">
-            Start Free
-          </h1>
-          <p className="text-sm text-brand-navy/60 mt-1">
-            5 free credits. No credit card required.
-          </p>
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md card !p-8">
+          <div className="flex flex-col items-center text-center mb-6">
+            <Link href="/" className="mb-4 inline-block">
+              <img src="/images/logo.png" alt="Listing Kit AI" className="h-20 w-auto" />
+            </Link>
+            <h1 className="font-display text-2xl font-bold text-brand-navy">
+              Start Free
+            </h1>
+            <p className="text-sm text-brand-navy/60 mt-2">
+              5 free credits. No credit card required.
+            </p>
+          </div>
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <Input
               label="Full name"

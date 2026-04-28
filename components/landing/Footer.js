@@ -6,7 +6,9 @@ export function Footer() {
     <footer className="bg-brand-navy text-white/80 mt-24">
       <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
-          <Logo light />
+          <Link href="/" className="inline-block">
+            <img src="/images/logo.png" alt="Listing Kit AI" className="h-16 w-auto" />
+          </Link>
           <p className="mt-4 text-sm text-white/60 max-w-sm">
             AI-powered marketing kits for real estate agents. Generate captions,
             reels, emails, ads, and listing copy in seconds — all from one
@@ -37,19 +39,19 @@ export function Footer() {
           <h4 className="text-white font-semibold mb-3 text-sm">Company</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-brand-gold">
+              <Link href="/privacy" className="hover:text-brand-gold">
                 Privacy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-brand-gold">
+              <Link href="/terms" className="hover:text-brand-gold">
                 Terms
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-brand-gold">
+              <Link href="/contact" className="hover:text-brand-gold">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

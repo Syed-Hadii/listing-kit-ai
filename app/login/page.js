@@ -50,11 +50,15 @@ function LoginContent() {
 
   return (
     <div className="min-h-screen bg-brand-cream flex flex-col">
-      <div className="px-6 py-5"><Logo /></div>
-      <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-md card">
-          <h1 className="font-display text-2xl font-bold text-brand-navy">Welcome back</h1>
-          <p className="text-sm text-brand-navy/60 mt-1">Log in to your Listing Kit AI account.</p>
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md card !p-8">
+          <div className="flex flex-col items-center text-center mb-6">
+            <Link href="/" className="mb-4 inline-block">
+              <img src="/images/logo.png" alt="Listing Kit AI" className="h-20 w-auto" />
+            </Link>
+            <h1 className="font-display text-2xl font-bold text-brand-navy">Welcome back</h1>
+            <p className="text-sm text-brand-navy/60 mt-2">Log in to your Listing Kit AI account.</p>
+          </div>
 
           {params.get("disabled") === "1" && (
             <div className="mt-4 p-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700">

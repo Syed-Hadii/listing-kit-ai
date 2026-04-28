@@ -9,8 +9,9 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-40 bg-brand-cream/80 backdrop-blur-lg border-b border-brand-navy/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Logo />
-       {/* <img src="/images/logo.png" alt="Listing Kit AI" className="w-auto h-20" /> */}
+        <Link href="/">
+          <img src="/images/logo.png" alt="Listing Kit AI" className="h-14 w-auto" />
+        </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-brand-navy/80">
           <a href="/#how" className="hover:text-brand-navy">How it works</a>
           <a href="/#what" className="hover:text-brand-navy">What it makes</a>
