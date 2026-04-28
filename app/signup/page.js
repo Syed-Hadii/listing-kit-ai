@@ -50,30 +50,68 @@ export default function SignupPage() {
       }
     }
 
-    toast.success("Please go to your inbox and confirm your email to complete signup.", {
-  duration: 5000,
-});
+    toast.success(
+      "Please go to your inbox and confirm your email to complete signup.",
+      {
+        duration: 5000,
+      },
+    );
     setLoading(false);
   }
 
   return (
     <div className="min-h-screen bg-brand-cream flex flex-col">
-      <div className="px-6 py-5"><Logo /></div>
+      <div className="px-6 py-5">
+        <Logo />
+      </div>
       <div className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-md card">
-          <h1 className="font-display text-2xl font-bold text-brand-navy">Start Free</h1>
-          <p className="text-sm text-brand-navy/60 mt-1">5 free credits. No credit card required.</p>
+          <h1 className="font-display text-2xl font-bold text-brand-navy">
+            Start Free
+          </h1>
+          <p className="text-sm text-brand-navy/60 mt-1">
+            5 free credits. No credit card required.
+          </p>
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
-            <Input label="Full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Jane Agent" />
-            <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input label="Password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
-            <Button type="submit" variant="gold" className="w-full" disabled={loading}>
+            <Input
+              label="Full name"
+              required
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Jane Agent"
+            />
+            <Input
+              label="Email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Password"
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="gold"
+              className="w-full"
+              disabled={loading}
+            >
               {loading ? "Creating account…" : "Create account"}
             </Button>
           </form>
           <p className="mt-5 text-sm text-brand-navy/60 text-center">
             Already have an account?{" "}
-            <Link href="/login" className="text-brand-navy font-semibold hover:text-brand-gold">Log in</Link>
+            <Link
+              href="/login"
+              className="text-brand-navy font-semibold hover:text-brand-gold"
+            >
+              Log in
+            </Link>
           </p>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { AdminTopbar } from "@/components/dashboard/AdminTopbar";
+import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,7 @@ export default async function AdminLayout({ children }) {
       <div className="lg:pl-72">
         <AdminTopbar />
         <main className="p-4 lg:p-8 max-w-7xl">{children}</main>
+        <DashboardFooter />
       </div>
     </div>
   );

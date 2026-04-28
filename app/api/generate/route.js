@@ -77,8 +77,6 @@ export async function POST(request) {
       "reel_script",
       "email_blast",
       "ad_copy",
-      "linkedin_post",
-      "property_description_output",
     ];
     for (const k of needed) {
       if (!parsed[k] || typeof parsed[k] !== "string") {
@@ -110,8 +108,6 @@ export async function POST(request) {
       reel_script: parsed.reel_script,
       email_blast: parsed.email_blast,
       ad_copy: parsed.ad_copy,
-      linkedin_post: parsed.linkedin_post,
-      property_description_output: parsed.property_description_output,
     };
 
     const { data: kit, error: kitError } = await admin

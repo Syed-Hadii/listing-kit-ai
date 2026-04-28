@@ -100,8 +100,6 @@ async function createTestKit(userId) {
       "reel_script",
       "email_blast",
       "ad_copy",
-      "linkedin_post",
-      "property_description_output",
     ];
     for (const k of needed) {
       if (!parsed[k] || typeof parsed[k] !== "string") {
@@ -132,8 +130,6 @@ async function createTestKit(userId) {
       reel_script: parsed.reel_script,
       email_blast: parsed.email_blast,
       ad_copy: parsed.ad_copy,
-      linkedin_post: parsed.linkedin_post,
-      property_description_output: parsed.property_description_output,
     };
 
     const { data: kit, error: kitError } = await admin
@@ -205,8 +201,6 @@ async function createTestKit(userId) {
     console.log(`     ✓ Reel Script (${parsed.reel_script.length} chars)`);
     console.log(`     ✓ Email Blast (${parsed.email_blast.length} chars)`);
     console.log(`     ✓ Ad Copy (${parsed.ad_copy.length} chars)`);
-    console.log(`     ✓ LinkedIn Post (${parsed.linkedin_post.length} chars)`);
-    console.log(`     ✓ Property Description (${parsed.property_description_output.length} chars)`);
     console.log(`   Credits Remaining: ${newCredits}`);
     console.log(`\n🎯 View your kit: http://localhost:3001/dashboard/kits/${kit.id}`);
 

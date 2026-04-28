@@ -15,8 +15,6 @@ const SECTION_META = [
   { key: "reel_script", label: "Reel Script" },
   { key: "email_blast", label: "Email Blast" },
   { key: "ad_copy", label: "Facebook / IG Ad"},
-  { key: "linkedin_post", label: "LinkedIn Post" },
-  { key: "property_description_output", label: "Property Description" },
 ];
 
 export default function KitDetailPage() {
