@@ -50,7 +50,9 @@ export default function SignupPage() {
       }
     }
 
-    toast.success("Please go to your inbox and confirm your email to complete signup.");
+    toast.success("Please go to your inbox and confirm your email to complete signup.", {
+  duration: 5000,
+});
     setLoading(false);
   }
 
