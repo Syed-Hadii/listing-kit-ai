@@ -11,7 +11,9 @@ export const dynamic = "force-dynamic";
 export async function POST(request) {
   try {
     const supabase = createSupabaseServerClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
@@ -19,7 +21,9 @@ export async function POST(request) {
     // Fetch profile
     const { data: profile, error: profileError } = await supabase
       .from("user_profiles")
-      .select("id, credits_remaining, credits_used, total_kits_generated, is_disabled")
+      .select(
+        "id, credits_remaining, credits_used, total_kits_generated, is_disabled",
+      )
       .eq("id", user.id)
       .single();
 
@@ -32,18 +36,18 @@ export async function POST(request) {
     if ((profile.credits_remaining ?? 0) <= 0) {
       return NextResponse.json(
         { error: "No credits remaining. Please upgrade your plan." },
-        { status: 402 }
+        { status: 402 },
       );
     }
 
     const body = await request.json();
-    
+
     // Validate input
     const validation = validateGenerateRequest(body);
     if (!validation.isValid) {
       return NextResponse.json(
         { error: "Invalid request", details: validation.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -57,8 +61,11 @@ export async function POST(request) {
     } catch (err) {
       console.error("AI generation failed:", err);
       return NextResponse.json(
-        { error: "AI generation failed. Please try again. No credit was charged." },
-        { status: 502 }
+        {
+          error:
+            "AI generation failed. Please try again. No credit was charged.",
+        },
+        { status: 502 },
       );
     }
 
@@ -66,8 +73,11 @@ export async function POST(request) {
     if (!parsed) {
       console.error("AI returned invalid JSON:", rawText?.slice(0, 500));
       return NextResponse.json(
-        { error: "AI returned invalid format. Please try again. No credit was charged." },
-        { status: 502 }
+        {
+          error:
+            "AI returned invalid format. Please try again. No credit was charged.",
+        },
+        { status: 502 },
       );
     }
 
@@ -82,8 +92,11 @@ export async function POST(request) {
       if (!parsed[k] || typeof parsed[k] !== "string") {
         console.error("Missing key in AI response:", k);
         return NextResponse.json(
-          { error: "Incomplete AI response. Please try again. No credit was charged." },
-          { status: 502 }
+          {
+            error:
+              "Incomplete AI response. Please try again. No credit was charged.",
+          },
+          { status: 502 },
         );
       }
     }
@@ -120,7 +133,7 @@ export async function POST(request) {
       console.error("Kit save failed:", kitError);
       return NextResponse.json(
         { error: "Failed to save kit. No credit was charged." },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -172,7 +185,7 @@ export async function POST(request) {
     console.error("Unhandled /api/generate error:", err);
     return NextResponse.json(
       { error: "Unexpected server error." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

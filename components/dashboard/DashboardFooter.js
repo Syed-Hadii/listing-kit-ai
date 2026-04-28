@@ -6,7 +6,7 @@ export function DashboardFooter() {
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4 text-xs text-brand-navy/60 text-center">
         <span>
           Copyright © {new Date().getFullYear()} Listing Kit AI. All rights
-          reserved | Design & Develop by 
+          reserved | Design & Develop by
         </span>
         <Link
           href="https://www.saadsproduction.com"

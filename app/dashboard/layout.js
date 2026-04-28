@@ -8,7 +8,9 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }) {
   const supabase = createSupabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
   const { data: profile } = await supabase

@@ -44,7 +44,9 @@ async function createTestKit(userId) {
     }
 
     console.log(`✓ Found user: ${profile.email}`);
-    console.log(`  Credits: ${profile.credits_remaining} | Plan: ${profile.current_plan}`);
+    console.log(
+      `  Credits: ${profile.credits_remaining} | Plan: ${profile.current_plan}`,
+    );
 
     if ((profile.credits_remaining ?? 0) <= 0) {
       console.error(`❌ User has no credits!`);
@@ -59,8 +61,10 @@ async function createTestKit(userId) {
       bedrooms: "6",
       bathrooms: "7",
       square_footage: "12,500",
-      key_features: "Infinity pool, smart home automation, wine cellar, home theater, guest house, mature landscaping",
-      property_description: "Stunning luxury villa in the heart of Beverly Hills with panoramic city views",
+      key_features:
+        "Infinity pool, smart home automation, wine cellar, home theater, guest house, mature landscaping",
+      property_description:
+        "Stunning luxury villa in the heart of Beverly Hills with panoramic city views",
       target_audience: "luxury buyer",
       tone: "luxury",
       platform_focus: "All Platforms",
@@ -164,7 +168,9 @@ async function createTestKit(userId) {
       process.exit(1);
     }
 
-    console.log(`✓ Credits updated: ${profile.credits_remaining} → ${newCredits}`);
+    console.log(
+      `✓ Credits updated: ${profile.credits_remaining} → ${newCredits}`,
+    );
 
     // Step 8: Create log entry
     await admin.from("credit_logs").insert({
@@ -197,13 +203,16 @@ async function createTestKit(userId) {
     console.log(`   Property: ${kitData.property_type} @ ${kitData.location}`);
     console.log(`   Price: ${kitData.price}`);
     console.log(`   Sections Generated:`);
-    console.log(`     ✓ Instagram Caption (${parsed.instagram_caption.length} chars)`);
+    console.log(
+      `     ✓ Instagram Caption (${parsed.instagram_caption.length} chars)`,
+    );
     console.log(`     ✓ Reel Script (${parsed.reel_script.length} chars)`);
     console.log(`     ✓ Email Blast (${parsed.email_blast.length} chars)`);
     console.log(`     ✓ Ad Copy (${parsed.ad_copy.length} chars)`);
     console.log(`   Credits Remaining: ${newCredits}`);
-    console.log(`\n🎯 View your kit: http://localhost:3001/dashboard/kits/${kit.id}`);
-
+    console.log(
+      `\n🎯 View your kit: http://localhost:3001/dashboard/kits/${kit.id}`,
+    );
   } catch (err) {
     console.error("❌ Error:", err.message);
     console.error(err.stack);
@@ -215,8 +224,12 @@ async function createTestKit(userId) {
 const userId = process.argv[2];
 if (!userId) {
   console.log("Usage: node scripts/create-test-kit.js <user-id>");
-  console.log("\nExample: node scripts/create-test-kit.js 550e8400-e29b-41d4-a716-446655440000");
-  console.log("\n💡 Tip: Find your user ID in Supabase → user_profiles table\n");
+  console.log(
+    "\nExample: node scripts/create-test-kit.js 550e8400-e29b-41d4-a716-446655440000",
+  );
+  console.log(
+    "\n💡 Tip: Find your user ID in Supabase → user_profiles table\n",
+  );
   process.exit(1);
 }
 
