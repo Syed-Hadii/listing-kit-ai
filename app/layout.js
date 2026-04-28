@@ -5,6 +5,9 @@ export const metadata = {
   title: "Listing Kit AI — Turn Any Listing Into a Full Marketing Campaign",
   description:
     "Listing Kit AI helps real estate agents generate captions, reels, emails, ads, and listing copy from one simple property form. Powered by Saad's Production.",
+  icons: {
+    icon: "/images/favicon.png",
+  },
   openGraph: {
     title: "Listing Kit AI",
     description:
