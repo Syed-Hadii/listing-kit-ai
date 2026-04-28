@@ -2,8 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { createSupabaseBrowserClient } from "@/lib/supabaseClient";
-import { Logo } from "@/components/ui/Logo";
+import { createSupabaseBrowserClient } from "@/lib/supabaseClient"; 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Card";
 
