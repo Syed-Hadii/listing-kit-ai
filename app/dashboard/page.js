@@ -143,7 +143,7 @@ export default async function DashboardHome() {
             action={<Link href="/dashboard/new-kit" className="btn btn-gold"><Plus size={16} /> Create Your First Kit</Link>}
           />
         ) : (
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
             {recentKits.map((k) => (
               <Link key={k.id} href={`/dashboard/kits/${k.id}`} className="card p-5 hover:border-brand-gold/40 transition-colors">
                 <div className="flex items-center justify-between mb-2">

@@ -16,15 +16,10 @@ const supabaseAdmin = createClient(
 
 const usersToCreate = [
   {
-    email: 'you@example.com',
-    password: '123456',
-    role: 'admin',
-  },
-  {
-    email: 'twitterkhulja@gmail.com',
-    password: '123456',
-    role: 'user',
-  },
+    email: "saadsahab410@gmail.com",
+    password: "$29@E}g1#5v",
+    role: "admin",
+  }, 
 ];
 
 async function seedUsers() {

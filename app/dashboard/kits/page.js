@@ -91,7 +91,7 @@ export default function SavedKitsPage() {
           action={kits.length === 0 ? <Link href="/dashboard/new-kit" className="btn btn-gold"><Plus size={16} /> Create Your First Kit</Link> : null}
         />
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
           {filtered.map((k) => (
             <Card key={k.id} className="!p-5 hover:border-brand-gold/40 transition-colors group">
               <div className="flex items-center justify-between mb-3">

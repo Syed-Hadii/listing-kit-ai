@@ -133,7 +133,7 @@ export default function NewKitPage() {
       </div>
 
       {!kit && (
-        <Card>
+        <Card className="w-full">
           <form onSubmit={onGenerate} className="space-y-5">
             <div className="grid md:grid-cols-2 gap-4">
               <Select

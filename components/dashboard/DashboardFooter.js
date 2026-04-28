@@ -3,7 +3,7 @@ import Link from "next/link";
 export function DashboardFooter() {
   return (
     <footer className="border-t border-brand-navy/10 bg-white/70">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4 text-xs text-brand-navy/60 text-center">
+      <div className="w-full px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 py-4 text-xs text-brand-navy/60 text-center">
         <span>
           Copyright © {new Date().getFullYear()} Listing Kit AI. All rights
           reserved | Design & Develop by
