@@ -9,12 +9,13 @@ export default function ContactUsPage() {
         Contact Us
       </h1>
       <p className="mt-3 text-brand-navy/70">
-        We are here to help with support, billing, onboarding, and
-        partnerships.
+        We are here to help with support, billing, onboarding, and partnerships.
       </p>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold text-brand-navy">General Support</h2>
+        <h2 className="text-xl font-semibold text-brand-navy">
+          General Support
+        </h2>
         <p className="mt-3 text-brand-navy/70">
           <a
             href="mailto:business@saadsproduction.com"
@@ -40,7 +41,9 @@ export default function ContactUsPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold text-brand-navy">Billing Questions</h2>
+        <h2 className="text-xl font-semibold text-brand-navy">
+          Billing Questions
+        </h2>
         <p className="mt-3 text-brand-navy/70">
           <a
             href="mailto:business@saadsproduction.com"
@@ -80,7 +83,9 @@ export default function ContactUsPage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold text-brand-navy">Response Time</h2>
-        <p className="mt-3 text-brand-navy/70">Usually within 24 business hours.</p>
+        <p className="mt-3 text-brand-navy/70">
+          Usually within 24 business hours.
+        </p>
       </section>
     </div>
   );

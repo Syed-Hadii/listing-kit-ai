@@ -7,7 +7,11 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <Link href="/" className="inline-block">
-            <img src="/images/logo.png" alt="Listing Kit AI" className="h-16 w-auto" />
+            <img
+              src="/images/logo.png"
+              alt="Listing Kit AI"
+              className="h-16 w-auto"
+            />
           </Link>
           <p className="mt-4 text-sm text-white/60 max-w-sm">
             AI-powered marketing kits for real estate agents. Generate captions,

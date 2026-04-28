@@ -9,9 +9,9 @@ export default function PrivacyPolicyPage() {
         Privacy Policy
       </h1>
       <p className="mt-3 text-brand-navy/70">
-        Listing Kit AI is a product owned and operated by Saad&apos;s Production.
-        We are committed to protecting your privacy and handling your
-        information responsibly.
+        Listing Kit AI is a product owned and operated by Saad&apos;s
+        Production. We are committed to protecting your privacy and handling
+        your information responsibly.
       </p>
 
       <section className="mt-10">
@@ -50,7 +50,9 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold text-brand-navy">Data Protection</h2>
+        <h2 className="text-xl font-semibold text-brand-navy">
+          Data Protection
+        </h2>
         <p className="mt-3 text-brand-navy/70">
           We use secure third-party infrastructure including hosting,
           authentication, and database systems. While no system is 100% risk

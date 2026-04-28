@@ -42,8 +42,8 @@ export default function TermsOfServicePage() {
       <section className="mt-10">
         <h2 className="text-xl font-semibold text-brand-navy">Accounts</h2>
         <p className="mt-3 text-brand-navy/70">
-          You are responsible for maintaining your login credentials and
-          account activity.
+          You are responsible for maintaining your login credentials and account
+          activity.
         </p>
       </section>
 
@@ -53,8 +53,8 @@ export default function TermsOfServicePage() {
         </h2>
         <p className="mt-3 text-brand-navy/70">
           Paid plans, credits, and subscriptions may be updated over time.
-          Unless stated otherwise, purchases are non refundable once credits
-          are used. Manual payment approval may apply for selected plans.
+          Unless stated otherwise, purchases are non refundable once credits are
+          used. Manual payment approval may apply for selected plans.
         </p>
       </section>
 

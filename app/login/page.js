@@ -19,23 +19,28 @@ function LoginContent() {
     e.preventDefault();
     setLoading(true);
     const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) {
       toast.error(error.message);
       setLoading(false);
       return;
     }
-    
+
     // Fetch user profile to check role
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { data: profile } = await supabase
       .from("user_profiles")
       .select("role")
       .eq("id", user?.id)
       .single();
-    
+
     toast.success("Welcome back!");
-    
+
     // Redirect based on role
     const redirectParam = params.get("redirect");
     if (redirectParam) {
@@ -54,10 +59,18 @@ function LoginContent() {
         <div className="w-full max-w-md card !p-8">
           <div className="flex flex-col items-center text-center mb-6">
             <Link href="/" className="mb-4 inline-block">
-              <img src="/images/logo.png" alt="Listing Kit AI" className="h-20 w-auto" />
+              <img
+                src="/images/logo.png"
+                alt="Listing Kit AI"
+                className="h-20 w-auto"
+              />
             </Link>
-            <h1 className="font-display text-2xl font-bold text-brand-navy">Welcome back</h1>
-            <p className="text-sm text-brand-navy/60 mt-2">Log in to your Listing Kit AI account.</p>
+            <h1 className="font-display text-2xl font-bold text-brand-navy">
+              Welcome back
+            </h1>
+            <p className="text-sm text-brand-navy/60 mt-2">
+              Log in to your Listing Kit AI account.
+            </p>
           </div>
 
           {params.get("disabled") === "1" && (
@@ -67,14 +80,37 @@ function LoginContent() {
           )}
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
-            <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input label="Password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-            <Button type="submit" variant="gold" className="w-full" disabled={loading}>
+            <Input
+              label="Email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Password"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="gold"
+              className="w-full"
+              disabled={loading}
+            >
               {loading ? "Logging in…" : "Log in"}
             </Button>
           </form>
           <p className="mt-5 text-sm text-brand-navy/60 text-center">
-            New here? <Link href="/signup" className="text-brand-navy font-semibold hover:text-brand-gold">Create an account</Link>
+            New here?{" "}
+            <Link
+              href="/signup"
+              className="text-brand-navy font-semibold hover:text-brand-gold"
+            >
+              Create an account
+            </Link>
           </p>
         </div>
       </div>

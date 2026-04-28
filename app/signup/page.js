@@ -65,7 +65,11 @@ export default function SignupPage() {
         <div className="w-full max-w-md card !p-8">
           <div className="flex flex-col items-center text-center mb-6">
             <Link href="/" className="mb-4 inline-block">
-              <img src="/images/logo.png" alt="Listing Kit AI" className="h-20 w-auto" />
+              <img
+                src="/images/logo.png"
+                alt="Listing Kit AI"
+                className="h-20 w-auto"
+              />
             </Link>
             <h1 className="font-display text-2xl font-bold text-brand-navy">
               Start Free
