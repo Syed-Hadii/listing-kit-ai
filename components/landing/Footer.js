@@ -32,7 +32,17 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/50">
           <p>© {new Date().getFullYear()} Listing Kit AI. All rights reserved.</p>
-          <p>Powered by <span className="text-brand-gold font-semibold">Saad's Production</span></p>
+          <p>
+            Powered by {" "}
+            <a
+              href="https://www.saadsproduction.com"
+              className="text-brand-gold font-semibold hover:text-white"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Saad&apos;s Production
+            </a>
+          </p>
         </div>
       </div>
     </footer>
