@@ -13,7 +13,7 @@ export function MarketingNav() {
           <img
             src="/images/logo.png"
             alt="Listing Kit AI"
-            className="h-14 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-brand-navy/80">
