@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
               fontSize: "14px",
               padding: "12px 16px",
             },
-            success: { iconTheme: { primary: "#D4AF37", secondary: "#0B1437" } },
+            success: {
+              iconTheme: { primary: "#D4AF37", secondary: "#0B1437" },
+            },
           }}
         />
       </body>
