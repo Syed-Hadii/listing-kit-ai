@@ -22,9 +22,11 @@ export default async function AdminLayout({ children }) {
   return (
     <div className="min-h-screen bg-brand-cream">
       <Sidebar variant="admin" userRole="admin" />
-      <div className="lg:pl-72">
+      <div className="lg:pl-72 min-h-screen flex flex-col">
         <AdminTopbar />
-        <main className="p-4 lg:p-8 max-w-7xl">{children}</main>
+        <main className="p-4 lg:p-8 max-w-7xl flex-1 w-full">
+          {children}
+        </main>
         <DashboardFooter />
       </div>
     </div>

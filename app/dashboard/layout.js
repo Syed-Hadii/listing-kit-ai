@@ -22,9 +22,11 @@ export default async function DashboardLayout({ children }) {
   return (
     <div className="min-h-screen bg-brand-cream">
       <Sidebar variant="user" userRole={profile?.role || "user"} />
-      <div className="lg:pl-72">
+      <div className="lg:pl-72 min-h-screen flex flex-col">
         <Topbar profile={profile} />
-        <main className="p-4 lg:p-8 max-w-7xl">{children}</main>
+        <main className="p-4 lg:p-8 max-w-7xl flex-1 w-full">
+          {children}
+        </main>
         <DashboardFooter />
       </div>
     </div>
