@@ -20,20 +20,20 @@ const PROPERTY_TYPES = [
   "Commercial",
 ];
 const AUDIENCES = [
-  "investor",
-  "family buyer",
-  "luxury buyer",
-  "first-time buyer",
-  "seller audience",
-  "relocation buyer",
+  "Investor",
+  "Family Buyer",
+  "Luxury Buyer",
+  "First-Time Buyer",
+  "Seller Audience",
+  "Relocation Buyer",
 ];
 const TONES = [
-  "luxury",
-  "professional",
-  "friendly",
-  "bold",
-  "investor-focused",
-  "emotional storytelling",
+  "Luxury",
+  "Professional",
+  "Friendly",
+  "Bold",
+  "Investor-Focused",
+  "Emotional Storytelling",
 ];
 const PLATFORMS = [
   "Instagram",
@@ -62,8 +62,8 @@ export default function NewKitPage() {
     square_footage: "",
     key_features: "",
     property_description: "",
-    target_audience: "family buyer",
-    tone: "professional",
+    target_audience: "Family Buyer",
+    tone: "Professional",
     platform_focus: "All Platforms",
     language: "English",
   });
