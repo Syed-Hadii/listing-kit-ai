@@ -24,7 +24,9 @@ export default async function AdminLayout({ children }) {
       <Sidebar variant="admin" userRole="admin" />
       <div className="lg:pl-72 min-h-screen flex flex-col">
         <AdminTopbar />
-        <main className="p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12 w-full flex-1">{children}</main>
+        <main className="p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12 w-full flex-1">
+          {children}
+        </main>
         <DashboardFooter />
       </div>
     </div>
