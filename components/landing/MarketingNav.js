@@ -8,12 +8,12 @@ export function MarketingNav() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 bg-brand-cream/80 backdrop-blur-lg border-b border-brand-navy/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         <Link href="/">
           <img
             src="/images/logo.png"
             alt="Listing Kit AI"
-            className="h-16 w-auto"
+            className="h-20 w-auto"
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-brand-navy/80">
