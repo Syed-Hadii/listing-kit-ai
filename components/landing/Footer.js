@@ -9,31 +9,58 @@ export function Footer() {
           <Logo light />
           <p className="mt-4 text-sm text-white/60 max-w-sm">
             AI-powered marketing kits for real estate agents. Generate captions,
-            reels, emails, ads, and listing copy in seconds — all from one property form.
+            reels, emails, ads, and listing copy in seconds — all from one
+            property form.
           </p>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Product</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/pricing" className="hover:text-brand-gold">Pricing</Link></li>
-            <li><Link href="/signup" className="hover:text-brand-gold">Start Free</Link></li>
-            <li><Link href="/login" className="hover:text-brand-gold">Log in</Link></li>
+            <li>
+              <Link href="/pricing" className="hover:text-brand-gold">
+                Pricing
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup" className="hover:text-brand-gold">
+                Start Free
+              </Link>
+            </li>
+            <li>
+              <Link href="/login" className="hover:text-brand-gold">
+                Log in
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Company</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-brand-gold">Privacy</a></li>
-            <li><a href="#" className="hover:text-brand-gold">Terms</a></li>
-            <li><a href="#" className="hover:text-brand-gold">Contact</a></li>
+            <li>
+              <a href="#" className="hover:text-brand-gold">
+                Privacy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-brand-gold">
+                Terms
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-brand-gold">
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} Listing Kit AI. All rights reserved.</p>
           <p>
-            Powered by {" "}
+            © {new Date().getFullYear()} Listing Kit AI. All rights reserved.
+          </p>
+          <p>
+            Powered by{" "}
             <a
               href="https://www.saadsproduction.com"
               className="text-brand-gold font-semibold hover:text-white"
