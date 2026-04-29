@@ -75,25 +75,41 @@ export async function POST(request) {
     // Build prompt
     const prompt = buildMarketingKitPrompt(body);
 
-    // Call AI provider
+    // Call AI provider (retry once on invalid JSON)
     let rawText;
-    try {
-      rawText = await generateMarketingKit(prompt);
-    } catch (err) {
-      console.error("AI generation failed:", err);
+    let parsed = null;
+    let requestError = null;
+    const maxAttempts = 2;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      try {
+        rawText = await generateMarketingKit(prompt);
+        parsed = safeParseJSON(rawText);
+        if (parsed) break;
+        console.warn("AI returned invalid JSON, retrying:", {
+          attempt,
+          provider,
+        });
+      } catch (err) {
+        requestError = err;
+        break;
+      }
+    }
+
+    if (requestError) {
+      console.error("AI generation failed:", requestError);
       return NextResponse.json(
         {
           error:
             "AI generation failed. Please try again. No credit was charged.",
           code: "ai_request_failed",
-          details: err?.message || "Unknown AI error",
+          details: requestError?.message || "Unknown AI error",
           provider,
         },
         { status: 502 },
       );
     }
 
-    const parsed = safeParseJSON(rawText);
     if (!parsed) {
       console.error("AI returned invalid JSON:", rawText?.slice(0, 500));
       return NextResponse.json(
