@@ -92,7 +92,16 @@ export default function NewKitPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        toast.error(data.error || "Generation failed", { id: tId });
+        let detailText = "";
+        if (Array.isArray(data.details)) {
+          detailText = data.details.join("; ");
+        } else if (typeof data.details === "string") {
+          detailText = data.details;
+        }
+        const message = detailText
+          ? `${data.error || "Generation failed"} (${detailText})`
+          : data.error || "Generation failed";
+        toast.error(message, { id: tId });
         setLoading(false);
         return;
       }

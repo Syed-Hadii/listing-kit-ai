@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { createSupabaseAdminClient } from "@/lib/supabaseAdmin";
-import { generateMarketingKit, safeParseJSON } from "@/lib/aiProvider";
+import {
+  generateMarketingKit,
+  getCurrentProvider,
+  safeParseJSON,
+} from "@/lib/aiProvider";
 import { buildMarketingKitPrompt } from "@/lib/prompts";
 import { validateGenerateRequest } from "@/lib/validation";
 
@@ -10,12 +14,16 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request) {
   try {
+    const provider = getCurrentProvider();
     const supabase = createSupabaseServerClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Not authenticated", code: "auth_required" },
+        { status: 401 },
+      );
     }
 
     // Fetch profile
@@ -28,14 +36,23 @@ export async function POST(request) {
       .single();
 
     if (profileError || !profile) {
-      return NextResponse.json({ error: "Profile not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Profile not found", code: "profile_missing" },
+        { status: 404 },
+      );
     }
     if (profile.is_disabled) {
-      return NextResponse.json({ error: "Account disabled" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Account disabled", code: "account_disabled" },
+        { status: 403 },
+      );
     }
     if ((profile.credits_remaining ?? 0) <= 0) {
       return NextResponse.json(
-        { error: "No credits remaining. Please upgrade your plan." },
+        {
+          error: "No credits remaining. Please upgrade your plan.",
+          code: "no_credits",
+        },
         { status: 402 },
       );
     }
@@ -46,7 +63,11 @@ export async function POST(request) {
     const validation = validateGenerateRequest(body);
     if (!validation.isValid) {
       return NextResponse.json(
-        { error: "Invalid request", details: validation.errors },
+        {
+          error: "Invalid request",
+          code: "invalid_request",
+          details: validation.errors,
+        },
         { status: 400 },
       );
     }
@@ -64,6 +85,9 @@ export async function POST(request) {
         {
           error:
             "AI generation failed. Please try again. No credit was charged.",
+          code: "ai_request_failed",
+          details: err?.message || "Unknown AI error",
+          provider,
         },
         { status: 502 },
       );
@@ -76,6 +100,9 @@ export async function POST(request) {
         {
           error:
             "AI returned invalid format. Please try again. No credit was charged.",
+          code: "ai_invalid_json",
+          details: "AI response was not valid JSON.",
+          provider,
         },
         { status: 502 },
       );
@@ -95,6 +122,9 @@ export async function POST(request) {
           {
             error:
               "Incomplete AI response. Please try again. No credit was charged.",
+            code: "ai_missing_key",
+            details: `Missing or invalid key: ${k}`,
+            provider,
           },
           { status: 502 },
         );
@@ -132,7 +162,11 @@ export async function POST(request) {
     if (kitError) {
       console.error("Kit save failed:", kitError);
       return NextResponse.json(
-        { error: "Failed to save kit. No credit was charged." },
+        {
+          error: "Failed to save kit. No credit was charged.",
+          code: "kit_save_failed",
+          details: kitError?.message || "Unknown database error",
+        },
         { status: 500 },
       );
     }
@@ -184,7 +218,11 @@ export async function POST(request) {
   } catch (err) {
     console.error("Unhandled /api/generate error:", err);
     return NextResponse.json(
-      { error: "Unexpected server error." },
+      {
+        error: "Unexpected server error.",
+        code: "unexpected_error",
+        details: err?.message || "Unknown server error",
+      },
       { status: 500 },
     );
   }
