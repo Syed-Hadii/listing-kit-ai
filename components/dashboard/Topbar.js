@@ -53,7 +53,7 @@ export function Topbar({ profile }) {
   const noCredits = (profile?.credits_remaining ?? 0) === 0;
 
   return (
-    <div className="h-16 bg-white border-b border-brand-navy/10 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-10 lg:top-0 mt-14 lg:mt-0">
+    <div className="h-16 bg-white border-b border-brand-navy/10 flex items-center justify-between px-4 lg:px-8 sticky top-20 z-10 lg:top-0 mt-20 lg:mt-0">
       <div className="flex items-center gap-3">
         <div className="hidden sm:flex items-center gap-2 text-sm">
           <span className="text-brand-navy/60">Credits:</span>
@@ -61,12 +61,17 @@ export function Topbar({ profile }) {
             {profile?.credits_remaining ?? 0}
           </Badge>
         </div>
-        <Badge variant={profile?.subscription_status === "active" ? "green" : "gray"}>
+        <Badge
+          variant={profile?.subscription_status === "active" ? "green" : "gray"}
+        >
           {profile?.current_plan?.replace("_", " ") || "free trial"}
         </Badge>
       </div>
       <div className="flex items-center gap-2">
-        <Link href="/dashboard/billing" className="btn btn-outline btn-sm hidden sm:inline-flex">
+        <Link
+          href="/dashboard/billing"
+          className="btn btn-outline btn-sm hidden sm:inline-flex"
+        >
           <CreditCard size={14} /> Upgrade
         </Link>
         <Link href="/dashboard/new-kit" className="btn btn-gold btn-sm">
@@ -87,29 +92,53 @@ export function Topbar({ profile }) {
           {open && (
             <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-luxury border border-brand-navy/10 overflow-hidden">
               <div className="px-4 py-3 border-b border-brand-navy/10 flex items-center justify-between">
-                <span className="font-bold text-brand-navy text-sm">Notifications</span>
+                <span className="font-bold text-brand-navy text-sm">
+                  Notifications
+                </span>
                 {unread > 0 && (
-                  <button onClick={markAllRead} className="text-xs text-brand-gold font-semibold">Mark all read</button>
+                  <button
+                    onClick={markAllRead}
+                    className="text-xs text-brand-gold font-semibold"
+                  >
+                    Mark all read
+                  </button>
                 )}
               </div>
               <div className="max-h-96 overflow-y-auto">
                 {items.length === 0 && (
-                  <p className="px-4 py-8 text-center text-sm text-brand-navy/50">No notifications yet</p>
+                  <p className="px-4 py-8 text-center text-sm text-brand-navy/50">
+                    No notifications yet
+                  </p>
                 )}
                 {items.map((n) => (
-                  <div key={n.id} className={`px-4 py-3 border-b border-brand-navy/5 last:border-0 ${!n.is_read ? "bg-brand-gold/5" : ""}`}>
+                  <div
+                    key={n.id}
+                    className={`px-4 py-3 border-b border-brand-navy/5 last:border-0 ${!n.is_read ? "bg-brand-gold/5" : ""}`}
+                  >
                     <div className="flex items-start gap-2">
-                      {!n.is_read && <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-gold flex-shrink-0" />}
+                      {!n.is_read && (
+                        <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-gold flex-shrink-0" />
+                      )}
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-brand-navy">{n.title}</p>
-                        <p className="text-xs text-brand-navy/60 mt-0.5">{n.message}</p>
-                        <p className="text-[10px] text-brand-navy/40 mt-1">{timeAgo(n.created_at)}</p>
+                        <p className="text-sm font-semibold text-brand-navy">
+                          {n.title}
+                        </p>
+                        <p className="text-xs text-brand-navy/60 mt-0.5">
+                          {n.message}
+                        </p>
+                        <p className="text-[10px] text-brand-navy/40 mt-1">
+                          {timeAgo(n.created_at)}
+                        </p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <Link href="/dashboard/notifications" onClick={() => setOpen(false)} className="block px-4 py-3 text-center text-xs font-semibold text-brand-navy hover:bg-brand-cream/50">
+              <Link
+                href="/dashboard/notifications"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 text-center text-xs font-semibold text-brand-navy hover:bg-brand-cream/50"
+              >
                 View all notifications
               </Link>
             </div>
